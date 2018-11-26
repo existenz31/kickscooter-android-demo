@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".MainActivity" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+
+        <com.google.android.gms.common.SignInButton
+            android:visibility="gone"
+            android:id="@+id/login_with_google"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:padding="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="60dp" />
+
+       <LinearLayout
+           android:visibility="visible"
+           android:orientation="vertical"
+           android:id="@+id/command_group"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+
+
+           <android.support.design.button.MaterialButton
+               android:id="@+id/but_refresh"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:onClick="onClickRefresh"
+               android:text="Refresh IoT Status"
+               android:visibility="gone" />
+
+
+           <android.support.design.button.MaterialButton
+                android:id="@+id/but_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onClickTest"
+                android:text="Test"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="1dp"
+                android:visibility="visible">
+
+                <android.support.design.button.MaterialButton
+                    android:id="@+id/but_start"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:onClick="onClickStartStop"
+                    app:backgroundTint="@color/mtrl_btn_dark_bg_color_selector"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:text="@string/start"
+                    tools:ignore="MissingConstraints"
+                    android:visibility="visible" />
+
+                <android.support.design.button.MaterialButton
+                    android:id="@+id/but_stop"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:onClick="onClickStartStop"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:text="@string/stop"
+                    tools:ignore="MissingConstraints"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+       </LinearLayout>
+
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

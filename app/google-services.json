@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "969764369705",
+    "firebase_url": "https://vulog-comodule-poc.firebaseio.com",
+    "project_id": "vulog-comodule-poc",
+    "storage_bucket": "vulog-comodule-poc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969764369705:android:925c0573d745adb8",
+        "android_client_info": {
+          "package_name": "com.vulog.kickscooter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "969764369705-uf1j22dagn0ua9jh1fesjmk1501ribq3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vulog.kickscooter",
+            "certificate_hash": "5923f9716f33887cd862c4ef054cfdf67ecf3e28"
+          }
+        },
+        {
+          "client_id": "969764369705-q5apqbtsl552i0gc84t3jfrd1l6ei3of.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9FZWLUXSQskUuj9DsRlg3bqkDdIr00mQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "969764369705-q5apqbtsl552i0gc84t3jfrd1l6ei3of.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,12 +1,15 @@
 package com.vulog.kickscooter;
 
 import android.Manifest;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -49,10 +52,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.vulog.kickscooter.model.IoT;
 import com.vulog.kickscooter.model.Vehicle;
+import com.vulog.kickscooter.ui.scooterinfo.ScooterInfoViewModel;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observer;
 
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
@@ -84,11 +89,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MenuItem mMenuItemLogout;
     private MenuItem mMenuItemRefresh;
 
+    private ScooterInfoViewModel mViewModel;
+
     DatabaseReference mRefIoTs = FirebaseDatabase.getInstance().getReference("iots");
     DatabaseReference mRefVehicles = FirebaseDatabase.getInstance().getReference("vehicles");
 
     Map<String, IoT> mIoTs = new HashMap<>();
     Map<String, Vehicle> mVehicles = new HashMap<>();
+    //LiveData<Map<String, Vehicle>> mVehicles;
 
     //ObjectMapper mapper = new ObjectMapper();
 
@@ -98,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     GoogleSignInClient mGoogleSignInClient;
     private FusedLocationProviderClient mFusedLocationProviderClient;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -131,6 +140,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mViewModel = ViewModelProviders.of(this).get(ScooterInfoViewModel.class);
+
+        //mVehicles = mViewModel.getVehicles();
 
         httpClient = new OkHttpClient();
 
@@ -184,6 +197,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //DatabaseReference myRef = database.getReference("message");
         //myRef.setValue("Hello, World!");
 
+//        mViewModel.getVehicles ().observe(this, new android.arch.lifecycle.Observer<Map<String, Vehicle>>() {
+//            @Override
+//            public void onChanged(@Nullable Map<String, Vehicle> vehicleMap) {
+//                mVehicles.getValue().clear();
+//                mVehicles.getValue().putAll(vehicleMap);
+//                updateMap();
+//            }
+//        });
+
         mRefVehicles.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -194,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     mVehicles.put(vehicle.getId(), vehicle);
                     Log.d(TAG, "Vehicle id: " + vehicle.getId());
                 }
-                updateMap();
+               updateMap();
             }
 
             @Override
@@ -455,6 +477,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
